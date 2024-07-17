@@ -1,0 +1,25 @@
+pipeline{
+
+    agent any
+
+    stages{
+
+    stage('Build Jar'){
+        steps{
+          bat "mvn clean package -Dskiptests"
+        }
+    }
+
+    stage('Build image'){
+        steps{
+          bat "docker build -t=syedanwer1997/selenium ."
+        }
+    }
+
+    stage('Push Image'){
+        steps{
+          bat "docker push syedanwer1997/selenium"
+           }
+        }
+    }
+}
